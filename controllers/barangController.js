@@ -1,4 +1,4 @@
-const { BarangHilang, Laboratorium, User } = require('../models');
+const { BarangHilang, Laboratorium, User, LokasiPenyimpanan } = require('../models');
 const { Op } = require('sequelize');
 
 const createBarang = async (req, res) => {
@@ -8,7 +8,7 @@ const createBarang = async (req, res) => {
       sumber_lokasi,
       lab_id,
       deskripsi,
-      lokasi_penyimpanan,
+      lokasi_id,
       detail_penyimpanan,
       tanggal_waktu
     } = req.body;
@@ -26,8 +26,8 @@ const createBarang = async (req, res) => {
       sumber_lokasi,
       lab_id: sumber_lokasi === 'laboratorium' ? lab_id : null,
       deskripsi,
-      lokasi_penyimpanan,
-      detail_penyimpanan: lokasi_penyimpanan === 'lainnya' ? detail_penyimpanan : null,
+      lokasi_id: lokasi_id || null,
+      detail_penyimpanan: !lokasi_id ? detail_penyimpanan : null,
       foto_url,
       status: 'belum_diambil',
       tanggal_waktu: tanggal_waktu || new Date(),
@@ -65,6 +65,11 @@ const getAllBarang = async (req, res) => {
           model: Laboratorium,
           as: 'laboratorium',
           attributes: ['id', 'kode_lab', 'nama_lab']
+        },
+        {
+          model: LokasiPenyimpanan,
+          as: 'lokasiPenyimpanan',
+          attributes: ['id', 'nama_lokasi']
         },
         {
           model: User,

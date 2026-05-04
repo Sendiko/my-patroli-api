@@ -6,6 +6,8 @@ const { sequelize } = require('./models');
 
 const authRoutes = require('./routes/authRoutes');
 const barangRoutes = require('./routes/barangRoutes');
+const labRoutes = require('./routes/labRoutes');
+const lokasiRoutes = require('./routes/lokasiRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +23,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use('/api', authRoutes); // /api/login, /api/register
 app.use('/api/barang', barangRoutes);
+app.use('/api/laboratorium', labRoutes);
+app.use('/api/lokasi', lokasiRoutes);
 
 // Route fallback untuk endpoint yang tidak ada
 app.use((req, res) => {

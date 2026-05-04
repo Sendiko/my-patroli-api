@@ -28,9 +28,14 @@ module.exports = {
       deskripsi: {
         type: Sequelize.TEXT
       },
-      lokasi_penyimpanan: {
-        type: Sequelize.ENUM('loker_1', 'loker_2', 'lainnya'),
-        allowNull: false
+      lokasi_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'LokasiPenyimpanans',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       detail_penyimpanan: {
         type: Sequelize.STRING
