@@ -9,8 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      kategori: {
-        type: Sequelize.STRING
+      kategori_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Kategoris',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       sumber_lokasi: {
         type: Sequelize.ENUM('laboratorium', 'cleaning_service', 'mahasiswa'),

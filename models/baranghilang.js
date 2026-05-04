@@ -13,10 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       BarangHilang.belongsTo(models.Laboratorium, { foreignKey: 'lab_id', as: 'laboratorium' });
       BarangHilang.belongsTo(models.User, { foreignKey: 'pelapor_id', as: 'pelapor' });
       BarangHilang.belongsTo(models.LokasiPenyimpanan, { foreignKey: 'lokasi_id', as: 'lokasiPenyimpanan' });
+      BarangHilang.belongsTo(models.Kategori, { foreignKey: 'kategori_id', as: 'kategori' });
     }
   }
   BarangHilang.init({
-    kategori: DataTypes.STRING,
+    kategori_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     sumber_lokasi: {
       type: DataTypes.ENUM('laboratorium', 'cleaning_service', 'mahasiswa'),
       allowNull: false

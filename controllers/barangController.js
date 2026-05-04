@@ -1,10 +1,10 @@
-const { BarangHilang, Laboratorium, User, LokasiPenyimpanan } = require('../models');
+const { BarangHilang, Laboratorium, User, LokasiPenyimpanan, Kategori } = require('../models');
 const { Op } = require('sequelize');
 
 const createBarang = async (req, res) => {
   try {
     const {
-      kategori,
+      kategori_id,
       sumber_lokasi,
       lab_id,
       deskripsi,
@@ -22,7 +22,7 @@ const createBarang = async (req, res) => {
     }
 
     const barang = await BarangHilang.create({
-      kategori,
+      kategori_id,
       sumber_lokasi,
       lab_id: sumber_lokasi === 'laboratorium' ? lab_id : null,
       deskripsi,
@@ -61,6 +61,11 @@ const getAllBarang = async (req, res) => {
     const barangList = await BarangHilang.findAll({
       where: whereClause,
       include: [
+        {
+          model: Kategori,
+          as: 'kategori',
+          attributes: ['id', 'nama_kategori']
+        },
         {
           model: Laboratorium,
           as: 'laboratorium',

@@ -8,12 +8,16 @@ const authRoutes = require('./routes/authRoutes');
 const barangRoutes = require('./routes/barangRoutes');
 const labRoutes = require('./routes/labRoutes');
 const lokasiRoutes = require('./routes/lokasiRoutes');
+const kategoriRoutes = require('./routes/kategoriRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3001',
+  optionsSuccessStatus: 200
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,6 +29,7 @@ app.use('/api', authRoutes); // /api/login, /api/register
 app.use('/api/barang', barangRoutes);
 app.use('/api/laboratorium', labRoutes);
 app.use('/api/lokasi', lokasiRoutes);
+app.use('/api/kategori', kategoriRoutes);
 
 // Route fallback untuk endpoint yang tidak ada
 app.use((req, res) => {
