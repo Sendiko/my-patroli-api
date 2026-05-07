@@ -118,8 +118,52 @@ const updateStatus = async (req, res) => {
   }
 };
 
+const getBarangById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const barang = await BarangHilang.findByPk(id, {
+      include: [
+        {
+          model: Kategori,
+          as: 'kategori',
+          attributes: ['id', 'nama_kategori']
+        },
+        {
+          model: Laboratorium,
+          as: 'laboratorium',
+          attributes: ['id', 'kode_lab', 'nama_lab']
+        },
+        {
+          model: LokasiPenyimpanan,
+          as: 'lokasiPenyimpanan',
+          attributes: ['id', 'nama_lokasi']
+        },
+        {
+          model: User,
+          as: 'pelapor',
+          attributes: ['id', 'username', 'nama_lengkap', 'role']
+        }
+      ]
+    });
+
+    if (!barang) {
+      return res.status(404).json({ message: 'Data barang tidak ditemukan' });
+    }
+
+    res.status(200).json({
+      message: 'Berhasil mengambil data barang',
+      data: barang
+    });
+  } catch (error) {
+    console.error('Error getting barang by id:', error);
+    res.status(500).json({ message: 'Terjadi kesalahan pada server' });
+  }
+};
+
 module.exports = {
   createBarang,
   getAllBarang,
+  getBarangById,
   updateStatus
 };

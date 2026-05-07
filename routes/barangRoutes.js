@@ -9,6 +9,7 @@ router.use(authMiddleware);
 
 router.post('/', uploadMiddleware.single('foto'), barangController.createBarang);
 router.get('/', barangController.getAllBarang);
+router.get('/:id', barangController.getBarangById);
 router.patch('/:id/status', barangController.updateStatus);
 
 module.exports = router;

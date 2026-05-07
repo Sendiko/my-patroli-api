@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    sumber_lokasi: {
-      type: DataTypes.ENUM('laboratorium', 'cleaning_service', 'mahasiswa'),
+    ditemukan_oleh: {
+      type: DataTypes.ENUM('asisten_laboratorium', 'cleaning_service', 'mahasiswa'),
       allowNull: false
     },
     lab_id: DataTypes.INTEGER,
