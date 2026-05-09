@@ -47,13 +47,13 @@ const createBarang = async (req, res) => {
 const getAllBarang = async (req, res) => {
   try {
     const { status, lab_id } = req.query;
-    
+
     let whereClause = {};
 
     if (status) {
       whereClause.status = status;
     }
-    
+
     if (lab_id) {
       whereClause.lab_id = lab_id;
     }

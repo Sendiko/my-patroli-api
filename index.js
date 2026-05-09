@@ -9,6 +9,7 @@ const barangRoutes = require('./routes/barangRoutes');
 const labRoutes = require('./routes/labRoutes');
 const lokasiRoutes = require('./routes/lokasiRoutes');
 const kategoriRoutes = require('./routes/kategoriRoutes');
+const activityLog = require('./middleware/activityLog');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(activityLog);
 
 // Setup folder statis untuk file upload
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
