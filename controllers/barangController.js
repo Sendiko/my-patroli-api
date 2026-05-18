@@ -21,10 +21,15 @@ const createBarang = async (req, res) => {
       foto_url = req.body.foto_url;
     }
 
+    let db_sumber_lokasi = sumber_lokasi;
+    if (sumber_lokasi === 'asisten_laboratorium') {
+      db_sumber_lokasi = 'laboratorium';
+    }
+
     const barang = await BarangHilang.create({
       kategori_id,
-      sumber_lokasi,
-      lab_id: sumber_lokasi === 'laboratorium' ? lab_id : null,
+      sumber_lokasi: db_sumber_lokasi,
+      lab_id: db_sumber_lokasi === 'laboratorium' ? lab_id : null,
       deskripsi,
       lokasi_id: lokasi_id || null,
       detail_penyimpanan: !lokasi_id ? detail_penyimpanan : null,
