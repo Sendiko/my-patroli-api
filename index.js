@@ -9,6 +9,7 @@ const barangRoutes = require('./routes/barangRoutes');
 const labRoutes = require('./routes/labRoutes');
 const lokasiRoutes = require('./routes/lokasiRoutes');
 const kategoriRoutes = require('./routes/kategoriRoutes');
+const userRoutes = require('./routes/userRoutes');
 const activityLog = require('./middleware/activityLog');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/api/barang', barangRoutes);
 app.use('/api/laboratorium', labRoutes);
 app.use('/api/lokasi', lokasiRoutes);
 app.use('/api/kategori', kategoriRoutes);
+app.use('/api/users', userRoutes);
 
 // Route fallback untuk endpoint yang tidak ada
 app.use((req, res) => {

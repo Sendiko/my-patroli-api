@@ -18,7 +18,7 @@ const activityLog = async (req, res, next) => {
       else if (originalUrl.includes('/api/laboratorium')) tableName = 'Laboratorium';
       else if (originalUrl.includes('/api/lokasi')) tableName = 'LokasiPenyimpanan';
       else if (originalUrl.includes('/api/kategori')) tableName = 'Kategori';
-      else if (originalUrl.includes('/api/login') || originalUrl.includes('/api/register')) tableName = 'User';
+      else if (originalUrl.includes('/api/users') || originalUrl.includes('/api/login') || originalUrl.includes('/api/register')) tableName = 'User';
 
       // Filter payload (hilangkan data sensitif)
       const payload = { ...body };
