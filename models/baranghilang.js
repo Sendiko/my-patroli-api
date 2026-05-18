@@ -38,7 +38,15 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'belum_diambil'
     },
     tanggal_waktu: DataTypes.DATE,
-    pelapor_id: DataTypes.INTEGER
+    pelapor_id: DataTypes.INTEGER,
+    nama_penerima: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    phone_nik: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'BarangHilang',

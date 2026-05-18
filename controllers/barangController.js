@@ -98,6 +98,7 @@ const getAllBarang = async (req, res) => {
 const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
+    const { nama_penerima, phone_nik } = req.body;
 
     const barang = await BarangHilang.findByPk(id);
 
@@ -106,6 +107,9 @@ const updateStatus = async (req, res) => {
     }
 
     barang.status = 'sudah_diambil';
+    if (nama_penerima) barang.nama_penerima = nama_penerima;
+    if (phone_nik) barang.phone_nik = phone_nik;
+
     await barang.save();
 
     res.status(200).json({
